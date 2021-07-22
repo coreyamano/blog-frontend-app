@@ -1,14 +1,11 @@
 <template>
-  <div class="home">
+  <div class="show">
     <h1>{{ message }}</h1>
-    <div v-for="post in posts" v-bind:key="post.id">
-      <p>{{ posts.id }}</p>
+  <div>
       <p>{{ posts.title }}</p>
       <p>{{ posts.user_id }}</p>
       <p>{{ posts.body }}</p>
-      <router-link v-bind:to="`/posts/${posts.id}`">
-        <img v-bind:src="posts.image" />
-      </router-link>
+      <img v-bind:src="posts.image" />
     </div>
   </div>
 </template>
@@ -20,16 +17,16 @@ import axios from "axios";
 export default {
   data: function () {
     return {
-      message: "All Posts!",
+      message: "View Post",
       posts: [],
     };
   },
   created: function () {
-    this.indexPosts();
+    this.postsIndex();
   },
   methods: {
-    indexPosts: function () {
-      axios.get("/posts").then((response) => {
+    postsIndex: function () {
+      axios.get("/posts/1").then((response) => {
         console.log(response.data);
         this.posts = response.data;
       });

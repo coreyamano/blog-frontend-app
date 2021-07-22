@@ -11,6 +11,12 @@
       <router-link to="/login">Login</router-link>
       |
       <router-link to="/logout">Logout</router-link>
+      |
+      <router-link to="/posts">All Posts</router-link>
+      |
+      <router-link to="/posts/new">New Post</router-link>
+      |
+      <router-link to="/posts/1">Show Post</router-link>
     </div>
     <router-view />
   </div>
