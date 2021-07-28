@@ -1,12 +1,16 @@
 <template>
   <div class="home">
     <h1>{{ message }}</h1>
-    <div v-for="post in posts" v-bind:key="post.id">
-      <p>{{ posts.id }}</p>
-      <p>{{ posts.title }}</p>
-      <p>{{ posts.user_id }}</p>
-      <p>{{ posts.body }}</p>
-      <router-link v-bind:to="`/posts/${posts.id}`">
+    <p>Search: <input v-model="searchTerm" /></p>
+    <div
+      v-for="post in filterBy(posts, searchTerm, 'title')"
+      v-bind:key="post.id"
+    >
+      <p>{{ post.id }}</p>
+      <p>{{ post.title }}</p>
+      <p>{{ post.user_id }}</p>
+      <p>{{ post.body }}</p>
+      <router-link v-bind:to="`/posts/${post.id}`">
         <img v-bind:src="posts.image" />
       </router-link>
     </div>
@@ -17,11 +21,14 @@
 
 <script>
 import axios from "axios";
+import Vue2Filters from "vue2-filters";
 export default {
+  mixins: [Vue2Filters.mixin],
   data: function () {
     return {
       message: "All Posts!",
       posts: [],
+      searchTerm: "",
     };
   },
   created: function () {

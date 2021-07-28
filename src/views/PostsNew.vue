@@ -9,9 +9,24 @@
         <label>Title:</label>
         <input type="text" v-model="newPostParams.title" />
       </div>
+      <div class="mb-3">
+      <label for="validationTextarea" class="form-label">Body:</label>
+        <textarea
+          class="form-control is-invalid"
+          id="validationTextarea"
+          placeholder="Post Body"
+          required
+        ></textarea>
+        <div class="invalid-feedback">
+        Please enter a message in the textarea.
+        </div>
+      </div>
       <div>
         <label>Body:</label>
         <input type="text" v-model="newPostParams.body" />
+        <small>
+          {{ 100 - newPostParams.body.length }} characters remaining</small
+        >
       </div>
       <div>
         <label>Image:</label>
@@ -31,7 +46,9 @@ export default {
   data: function () {
     return {
       message: "Make a New Post",
-      newPostParams: {},
+      newPostParams: {
+        body: "",
+      },
       errors: [],
     };
   },
